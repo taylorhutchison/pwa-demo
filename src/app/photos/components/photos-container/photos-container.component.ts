@@ -14,6 +14,8 @@ export class PhotosContainerComponent implements OnInit, AfterViewInit {
 
   dataUrls: string[] = [];
 
+  error: string;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -26,11 +28,15 @@ export class PhotosContainerComponent implements OnInit, AfterViewInit {
   }
 
   async openCamera() {
-    const stream = await navigator.mediaDevices.getUserMedia({
-      video: true
-    });
-    this.video.nativeElement.srcObject = stream;
-
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: true
+      });
+      this.video.nativeElement.srcObject = stream;
+    }
+    catch (error) {
+      this.error = error;
+    }
   }
 
   async takePhoto() {
