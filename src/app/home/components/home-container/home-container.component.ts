@@ -10,7 +10,11 @@ export class HomeContainerComponent implements OnInit {
   @ViewChild('video')
   video: ElementRef<HTMLVideoElement>;
 
-  constructor() { }
+  userAgent: string;
+
+  constructor() {
+    this.userAgent = navigator.userAgent;
+  }
 
   ngOnInit(): void {
 
