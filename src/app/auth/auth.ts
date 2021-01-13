@@ -1,13 +1,14 @@
 import { IPublicClientApplication, PublicClientApplication, InteractionType, BrowserCacheLocation } from '@azure/msal-browser';
 import { MsalInterceptorConfiguration, MsalGuardConfiguration } from '@azure/msal-angular';
+import { environment } from '../../environments/environment';
 
 const isIE = window.navigator.userAgent.indexOf("MSIE ") > -1 || window.navigator.userAgent.indexOf("Trident/") > -1;
 
 export function MSALInstanceFactory(): IPublicClientApplication {
     return new PublicClientApplication({
         auth: {
-            clientId: '',
-            authority: '',
+            clientId: environment.clientId,
+            authority: environment.authority,
             redirectUri: 'http://localhost:4200',
             postLogoutRedirectUri: 'http://localhost:4200'
         },
