@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MsalGuard, MsalInterceptor, MsalBroadcastService, MsalInterceptorConfiguration, MsalModule, MsalService, MSAL_GUARD_CONFIG, MSAL_INSTANCE, MSAL_INTERCEPTOR_CONFIG, MsalGuardConfiguration } from '@azure/msal-angular';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MSALGuardConfigFactory, MSALInstanceFactory, MSALInterceptorConfigFactory } from './auth';
+import { ConfigurationService } from '../configuration.service';
 
 @NgModule({
   declarations: [],
@@ -18,7 +19,14 @@ import { MSALGuardConfigFactory, MSALInstanceFactory, MSALInterceptorConfigFacto
     },
     {
       provide: MSAL_INSTANCE,
-      useFactory: MSALInstanceFactory
+      useFactory: (configService: ConfigurationService) => {
+        return () => {
+          new Promise<any>((res) => {
+            res(MSALInstanceFactory(configService.config));
+          });
+        }
+      },
+      deps: [ConfigurationService],
     },
     {
       provide: MSAL_GUARD_CONFIG,

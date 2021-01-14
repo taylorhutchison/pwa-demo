@@ -5,10 +5,16 @@ import { Injectable } from '@angular/core';
 })
 export class ConfigurationService {
 
+  config: any;
+
   constructor() { }
 
   load() {
     return new Promise<boolean>((res, rej) => {
+      this.config = {
+        clientId: '',
+        authority: ''
+      }
       res(true);
     });
   }
