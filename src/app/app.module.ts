@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -8,6 +8,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { RouterModule } from '@angular/router';
 import { AuthModule } from './auth/auth.module';
+import { ConfigurationService } from './configuration.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,16 @@ import { AuthModule } from './auth/auth.module';
     HttpClientModule,
     AuthModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (config: ConfigurationService) => {
+        return () => config.load();
+      },
+      deps: [ConfigurationService],
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
