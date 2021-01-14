@@ -20,11 +20,7 @@ import { ConfigurationService } from '../configuration.service';
     {
       provide: MSAL_INSTANCE,
       useFactory: (configService: ConfigurationService) => {
-        return () => {
-          new Promise<any>((res) => {
-            res(MSALInstanceFactory(configService.config));
-          });
-        }
+        return MSALInstanceFactory(configService.config);
       },
       deps: [ConfigurationService],
     },

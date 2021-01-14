@@ -3,7 +3,7 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { MsalGuard } from '@azure/msal-angular';
 
 const routes: Routes = [
-  { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule), canActivate: [MsalGuard] },
+  { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
   {
     path: 'photos',
     loadChildren: () => import('./photos/photos.module').then(m => m.PhotosModule),

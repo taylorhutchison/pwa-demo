@@ -7,14 +7,17 @@ export class ConfigurationService {
 
   config: any;
 
-  constructor() { }
+  constructor() {
+    this.config = {
+      clientId: 'abc123',
+      authority: 'https://login.microsoftonline.com/abc123',
+      redirectUri: 'http://localhost',
+      postLogoutRedirectUri: 'http://localhost'
+    }
+  }
 
   load() {
     return new Promise<boolean>((res, rej) => {
-      this.config = {
-        clientId: '',
-        authority: ''
-      }
       res(true);
     });
   }
