@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,20 +6,24 @@ import { Injectable } from '@angular/core';
 })
 export class ConfigurationService {
 
-  config: any;
+  // tslint:disable-next-line
+  private _config: any;
 
-  constructor() {
-    this.config = {
-      clientId: 'abc123',
-      authority: 'https://login.microsoftonline.com/abc123',
-      redirectUri: 'http://localhost',
-      postLogoutRedirectUri: 'http://localhost'
-    }
+  get config(): any {
+    return this._config;
   }
+
+  constructor(private http: HttpClient) { }
 
   load() {
     return new Promise<boolean>((res, rej) => {
-      res(true);
+      this.http.get('/api/ConfigurationProviderHttpTrigger')
+        .subscribe(response => {
+          this._config = response;
+          res(true);
+        }, () => {
+          rej(false);
+        })
     });
   }
 }
