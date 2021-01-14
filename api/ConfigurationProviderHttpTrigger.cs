@@ -7,6 +7,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using PWADemo.Function.Models;
 
 namespace PWADemo.Function
 {
@@ -18,10 +19,14 @@ namespace PWADemo.Function
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
-
-            var responseMessage = "Hello, world!";
-
-            return new OkObjectResult(responseMessage);
+            var configuration = new Configuration
+            {
+                ClientId = Environment.GetEnvironmentVariable("clientId"),
+                Authority = Environment.GetEnvironmentVariable("authority"),
+                RedirectUri = Environment.GetEnvironmentVariable("redirectUri"),
+                PostLogoutRedirectUri = Environment.GetEnvironmentVariable("postLogoutRedirectUri")
+            };
+            return new OkObjectResult(configuration);
         }
     }
 }
