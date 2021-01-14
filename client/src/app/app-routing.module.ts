@@ -9,8 +9,7 @@ const routes: Routes = [
     loadChildren: () => import('./photos/photos.module').then(m => m.PhotosModule),
     canActivate: [MsalGuard]
   },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: '**', redirectTo: 'home' }
+  { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 @NgModule({
