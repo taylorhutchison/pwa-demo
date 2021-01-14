@@ -1,6 +1,12 @@
 {
     "routes": [
         {
+            "route": "/api/*",
+            "allowedRoles": [
+                "anyonmous"
+            ]
+        },
+        {
             "route": "/*",
             "serve": "/index.html",
             "statusCode": 200
