@@ -1,29 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConfigurationService {
 
+  configUrl: string = "/api/ConfigurationProviderHttpTrigger";
   // tslint:disable-next-line
-  private _config: any;
+  config: Subject<any>;
 
-  get config(): any {
-    return this._config;
+  constructor(private http: HttpClient) {
+    this.config = new Subject<any>();
   }
 
-  constructor(private http: HttpClient) { }
-
   load() {
-    return new Promise<boolean>((res, rej) => {
-      this.http.get('/api/ConfigurationProviderHttpTrigger')
-        .subscribe(response => {
-          this._config = response;
-          res(true);
-        }, () => {
-          rej(false);
-        })
-    });
+    return new Promise<any>(async (res, rej) => {
+      const response = await fetch(this.configUrl);
+      this.config.next(response);
+      res(response);
+    })
   }
 }

@@ -68,7 +68,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "pwa-demo:build"
+            "browserTarget": "pwa-demo:build",
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {
@@ -161,6 +162,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "pwa-demo"
 }

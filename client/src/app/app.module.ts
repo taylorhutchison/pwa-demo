@@ -1,14 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { APP_INITIALIZER, NgModule, Provider } from '@angular/core';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { RouterModule } from '@angular/router';
-import { AuthModule } from './auth/auth.module';
 import { ConfigurationService } from './configuration.service';
+import { MsalModule } from '@azure/msal-angular';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -20,18 +21,11 @@ import { ConfigurationService } from './configuration.service';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     RouterModule,
     HttpClientModule,
+    MsalModule,
     AuthModule
   ],
-  providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (config: ConfigurationService) => {
-        return () => config.load();
-      },
-      deps: [ConfigurationService],
-      multi: true
-    },
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

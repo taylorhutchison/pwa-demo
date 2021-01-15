@@ -3,13 +3,13 @@ import { MsalInterceptorConfiguration, MsalGuardConfiguration } from '@azure/msa
 
 const isIE = window.navigator.userAgent.indexOf("MSIE ") > -1 || window.navigator.userAgent.indexOf("Trident/") > -1;
 
-export function MSALInstanceFactory(config: any): IPublicClientApplication {
+export function MSALInstanceFactory(): IPublicClientApplication {
     return new PublicClientApplication({
         auth: {
-            clientId: config.clientId,
-            authority: config.authority,
-            redirectUri: config.redirectUri,
-            postLogoutRedirectUri: config.postLogoutRedirectUri
+            clientId: '33ee156e-f6de-406f-9533-3c402ced099a',
+            authority: 'https://login.microsoftonline.com/f167129d-f0b9-4fdf-b4c0-8aa79fa09893',
+            redirectUri: window.location.origin,
+            postLogoutRedirectUri: window.location.origin
         },
         cache: {
             cacheLocation: BrowserCacheLocation.LocalStorage,
