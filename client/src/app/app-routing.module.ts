@@ -4,11 +4,7 @@ import { MsalGuard } from '@azure/msal-angular';
 
 const routes: Routes = [
   { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
-  {
-    path: 'photos',
-    loadChildren: () => import('./photos/photos.module').then(m => m.PhotosModule),
-    canActivate: [MsalGuard]
-  },
+  { path: 'photos', loadChildren: () => import('./photos/photos.module').then(m => m.PhotosModule) },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

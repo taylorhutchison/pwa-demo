@@ -1,0 +1,6 @@
+<nav>
+    <a [routerLink]="['/home']">Home</a>
+    <a [routerLink]="['/photos']">Photos</a>
+    <button *ngIf="!loggedIn" (click)="login()">Login</button>
+    <button *ngIf="loggedIn" (click)="logout()">Logout</button>
+</nav>
