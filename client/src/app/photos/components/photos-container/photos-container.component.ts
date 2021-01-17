@@ -16,6 +16,8 @@ export class PhotosContainerComponent implements OnInit, AfterViewInit {
 
   error: string;
 
+  stream: MediaStream;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -27,12 +29,17 @@ export class PhotosContainerComponent implements OnInit, AfterViewInit {
     });
   }
 
+  ngOnDestroy() {
+    this.video.nativeElement.srcObject = null;
+    this.stream.getTracks()[0].stop();
+  }
+
   async openCamera() {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({
+      this.stream = await navigator.mediaDevices.getUserMedia({
         video: true
       });
-      this.video.nativeElement.srcObject = stream;
+      this.video.nativeElement.srcObject = this.stream;
     }
     catch (error) {
       this.error = error;
