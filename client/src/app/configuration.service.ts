@@ -7,23 +7,24 @@ import { BehaviorSubject, Subject } from 'rxjs';
 })
 export class ConfigurationService {
 
-  configUrl: string = "/api/ConfigurationProviderHttpTrigger";
+  authConfigUrl: string = "/api/AuthConfiguration";
   // tslint:disable-next-line
-  private _config: any;
+  private _authConfig: any;
 
-  get config(): any {
-    return this._config;
+  get authConfig(): any {
+    return this._authConfig;
   }
 
   constructor(private http: HttpClient) {
   }
 
   load() {
-    return new Promise<any>(async (res, _) => {
-      this.http.get(this.configUrl).subscribe(response => {
-        this._config = response;
+    const authConfig = new Promise<any>(async (res, _) => {
+      this.http.get(this.authConfigUrl).subscribe(response => {
+        this._authConfig = response;
         res(response);
       })
     })
+    return Promise.all([authConfig]);
   }
 }

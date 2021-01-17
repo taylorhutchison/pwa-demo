@@ -11,9 +11,9 @@ using PWADemo.Function.Models;
 
 namespace PWADemo.Function
 {
-    public static class ConfigurationProviderHttpTrigger
+    public static class AuthConfiguration
     {
-        [FunctionName("ConfigurationProviderHttpTrigger")]
+        [FunctionName("AuthConfiguration")]
         public static IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
