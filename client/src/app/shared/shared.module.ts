@@ -10,8 +10,7 @@ import { AuthModule } from '../auth/auth.module';
   declarations: [NavComponent],
   imports: [
     CommonModule,
-    RouterModule,
-    AuthModule
+    RouterModule
   ],
   exports: [
     NavComponent

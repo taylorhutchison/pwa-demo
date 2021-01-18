@@ -1,11 +1,10 @@
 import { IPublicClientApplication, PublicClientApplication, InteractionType, BrowserCacheLocation } from '@azure/msal-browser';
 import { MsalInterceptorConfiguration, MsalGuardConfiguration } from '@azure/msal-angular';
-import { ConfigurationService } from '../configuration.service';
 
 const isIE = window.navigator.userAgent.indexOf("MSIE ") > -1 || window.navigator.userAgent.indexOf("Trident/") > -1;
 
-export function MSALInstanceFactory(configurationService: ConfigurationService): PublicClientApplication {
-    const authConfig = configurationService.authConfig;
+export function MSALInstanceFactory(configuration: any): PublicClientApplication {
+    const authConfig = configuration;
     return new PublicClientApplication({
         auth: { ...authConfig },
         cache: {

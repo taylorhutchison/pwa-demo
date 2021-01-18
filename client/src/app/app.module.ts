@@ -7,6 +7,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { RouterModule } from '@angular/router';
 import { ConfigurationService } from './configuration.service';
 import { environment } from 'src/environments/environment';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -17,21 +18,10 @@ import { environment } from 'src/environments/environment';
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    AuthModule
   ],
-  providers: [
-    ConfigurationService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (configurationService: ConfigurationService) => {
-        return () => {
-          return configurationService.load();
-        }
-      },
-      multi: true,
-      deps: [ConfigurationService]
-    }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

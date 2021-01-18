@@ -4,6 +4,7 @@ import { MsalGuard, MsalInterceptor, MsalBroadcastService, MsalInterceptorConfig
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MSALGuardConfigFactory, MSALInstanceFactory, MSALInterceptorConfigFactory } from './auth';
 import { ConfigurationService } from '../configuration.service';
+import { APP_CONFIGURATION } from '../app.configuration';
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import { ConfigurationService } from '../configuration.service';
     {
       provide: MSAL_INSTANCE,
       useFactory: MSALInstanceFactory,
-      deps: [ConfigurationService]
+      deps: [APP_CONFIGURATION]
     },
     {
       provide: HTTP_INTERCEPTORS,
